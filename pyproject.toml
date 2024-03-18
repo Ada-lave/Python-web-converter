@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "printerio-converter"
+version = "0.1.0"
+description = "A converter from doc to pdf in docker"
+authors = ["Ada-lave <113159483+Ada-lave@users.noreply.github.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.110.0"
+python-multipart = "^0.0.9"
+gunicorn = "^21.2.0"
+uvicorn = "^0.28.0"
+aiofiles = "^23.2.1"
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.28"}
+alembic = "^1.13.1"
+asyncpg = "^0.29.0"
+aiosqlite = "^0.20.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

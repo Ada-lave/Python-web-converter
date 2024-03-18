@@ -1,0 +1,10 @@
+version: '3'
+services:
+  converter1:
+    build: .
+    ports:
+      - "${PORT}:${PORT}"
+    volumes:
+      - "./src:/var/www/converter"
+    env_file:
+      - .env
