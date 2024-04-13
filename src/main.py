@@ -1,5 +1,5 @@
 from fastapi import FastAPI, UploadFile
-from converter.converter import Converter
+from converters.converter import Converter
 from fastapi.responses import FileResponse
 from api_v1 import router
 import uvicorn
