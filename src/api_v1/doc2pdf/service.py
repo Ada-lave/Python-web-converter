@@ -3,7 +3,7 @@ from fastapi import UploadFile
 from utils.repository import AbstractRepository
 from .schemas import BaseFile
 from converters.doc2pdf import Doc2Pdf
-
+import os
 class FileService:
     def __init__(self, file_repo: AbstractRepository):
         self.file_repo = file_repo()
