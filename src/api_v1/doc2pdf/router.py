@@ -17,7 +17,3 @@ async def convert_doc_to_pdf(
     return FileResponse(f"{converted_pdf_file[0]}", filename=f"{converted_pdf_file[1]}.pdf")
 
 
-@router.get("/docx2pdf")
-async def get_doc_to_pdf(file_service: FileService = Depends(file_service)):
-    res = await file_service.get_all_files()
-    return res
