@@ -7,7 +7,7 @@ from .schemas import BaseFile
 router = APIRouter(prefix="")
 
 
-@router.post("/docx2pdf")
+@router.post("/doc2pdf")
 async def convert_doc_to_pdf(
     file: UploadFile, file_service: FileService = Depends(file_service)
 ):
