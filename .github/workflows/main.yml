@@ -16,7 +16,7 @@ jobs:
           username: ${{ secrets.USER }}
           password: ${{ secrets.PASSWORD }}
 
-          command: |
+          script: |
             cd ${{ secrets.PG_FOLDER }};
             git checkout main;
             git pull;
