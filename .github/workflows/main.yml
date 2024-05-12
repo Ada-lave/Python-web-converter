@@ -10,11 +10,11 @@ jobs:
       - name: Checkout to code
         uses: actions/checkout@v3
       - name: "deploy"
-        uses: D3rHase/ssh-command-action@v0.2.2
+        uses: appleboy/ssh-action@v1.0.3
         with: 
           host: ${{ secrets.HOST }}
           user: ${{ secrets.USER }}
-          private_key: ${{ secrets.PASSWORD }}
+          password: ${{ secrets.PASSWORD }}
 
           command: |
             cd ${{ secrets.PG_FOLDER }};
