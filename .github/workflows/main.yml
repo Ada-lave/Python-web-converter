@@ -18,7 +18,6 @@ jobs:
 
           script: |
             cd ${{ secrets.PG_FOLDER }};
-            git checkout main;
             git pull;
             docker compose down;
             docker compose up --build -d;
