@@ -27,7 +27,7 @@ class FileService:
         return await self.file_repo.find_all()
 
     async def file_response(self, file_data: list, type: str):
-        file_path = file_data[0]
+        file_path = f"{file_data[0]}.{type}"
         filename = f"{file_data[1]}.{type}"
         return FileResponse(
             path=file_path,
