@@ -12,12 +12,12 @@ jobs:
       - name: "deploy"
         uses: D3rHase/ssh-command-action@v0.2.2
         with: 
-          host: ${{ secrets.host }}
-          user: ${{ secrets.user }}
-          private_key: ${{ secrets.password }}
+          host: ${{ secrets.HOST }}
+          user: ${{ secrets.USER }}
+          private_key: ${{ secrets.PASSWORD }}
 
           command: |
-            cd ${{ secrets.pg_folder }};
+            cd ${{ secrets.PG_FOLDER }};
             git checkout main;
             git pull;
             docker compose down;
