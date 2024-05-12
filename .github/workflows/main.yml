@@ -1,0 +1,25 @@
+name: "Deploy Converter"
+on: 
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout to code
+        uses: actions/checkout@v3
+      - name: "deploy"
+        uses: D3rHase/ssh-command-action@v0.2.2
+        with: 
+          host: ${{ secrets.HOST }}
+          user: ${{ secrets.USER }}
+          private_key: ${{ secrets.PASSWORD }}
+
+          command: |
+            cd ${{ secrets.PG_FOLDER }};
+            git checkout main;
+            git pull;
+            docker compose down;
+            docker compose up --build -d;
+            
