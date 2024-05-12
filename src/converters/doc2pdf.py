@@ -13,6 +13,14 @@ class Doc2Pdf(Converter):
         await self.save_file()
         await self.convert_to("pdf")
         filename = Path(self.file.filename).stem
-        res = f"{Path('files') / filename}.pdf"
+        res = f"{Path('files') / filename}"
+        
+        return [res, filename]
+    
+    async def pdf2doc(self):
+        await self.save_file()
+        await self.convert_to("docx")
+        filename = Path(self.file.filename).stem
+        res = f"{Path('files') / filename}"
         
         return [res, filename]

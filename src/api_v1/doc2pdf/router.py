@@ -1,27 +1,32 @@
 from fastapi import APIRouter, UploadFile, Depends
 from .service import FileService
-from fastapi.responses import FileResponse
 from .dependencies import file_service
 from .schemas import BaseFile
-from starlette.background import BackgroundTask
-from .backgroud_tasks import delete_files_after_send
-
+from fastapi import BackgroundTasks
+from .backgroud_tasks import delete_file_after_send
 
 router = APIRouter(prefix="")
 
 @router.post("/doc2pdf")
 async def convert_doc_to_pdf(
-    file: UploadFile, file_service: FileService = Depends(file_service)
+    file: UploadFile,
+    backgroud_tasks: BackgroundTasks,
+    file_service: FileService = Depends(file_service)
 ):
     
     file_s = BaseFile(name=file.filename, file_type_id=1, size=file.size)
-    converted_pdf_file = await file_service.convert_file_doc_to_pdf(file_s, file)
+    converted_pdf_file_data = await file_service.convert_file_doc_to_pdf(file_s, file)   
+    backgroud_tasks.add_task(delete_file_after_send, f"{converted_pdf_file_data[0]}.pdf") 
+    return await file_service.file_response(converted_pdf_file_data, "pdf")
     
-    file_path = converted_pdf_file[0]
-    filename = f"{converted_pdf_file[1]}.pdf"
-    print(file_path)
-    return FileResponse(path=file_path, 
-                        filename=filename, 
-                        background=BackgroundTask(delete_files_after_send, file_path))
 
-
+@router.post("/pdf2doc")
+async def convert_pdf_to_docx(
+    file: UploadFile, 
+    backgroud_tasks: BackgroundTasks,
+    file_service: FileService = Depends(file_service),
+):
+    converted_doc_file = await file_service.convert_pdf_file_to_doc(file)
+    return await file_service.file_response(converted_doc_file, "docx")
+    
+    
